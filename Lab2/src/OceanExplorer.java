@@ -26,19 +26,45 @@ public class OceanExplorer extends Application{
 	
 @Override
 public void start(Stage mapStage) throws Exception{
-		oceanMap = new oceanMap(dimensions,, islandCount);
+		oceanMap Map = new oceanMap(dimensions,, islandCount);
 		islandMap = oceanMap.getMap();
-		
 		root = new AnchorPane();
 		drawMap();
-		
 		ship = new ship(oceanMap);
 		loadShipImage();
-		
 		scene = new Scene(root, 500, 500);
-		mapStage.setTitle("CC");
+		mapStage.setTitle("Columbus Game");
 		mapStage.setScene(scene);
 		mapStage.show();
 		startSailing();
+	}
+
+private void startSailing() {
+	scene.setOnKeyPressed(new EventHandler<KeyEvent>(){
+		
+		public void handle(KeyEvent ke) {
+            switch(ke.getCode()) {
+                case RIGHT :
+                    navy.goEast(Map.getLocation().x*scale,Map.getLocation().y*scale);
+                    break;
+                case LEFT :
+                    navy.goWest(Map.getLocation().x*scale,Map.getLocation().y*scale);
+
+                    break;
+                case UP :
+                    navy.goNorth(Map.getLocation().x*scale,Map.getLocation().y*scale);
+                    break;
+                case DOWN :
+                    navy.goSouth(Map.getLocation().x*scale,Map.getLocation().y*scale);
+                    break;
+                default :
+                    break;
+            }
+            ShipImageView.setX(navy.getLocation().x);
+            ShipImageView.setY(navy.getLocation().y);
+
+            Map.setLocation(navy.getLocation().x/50, navy.getLocation().y/50);
+        }
+    });
 	}
 }
