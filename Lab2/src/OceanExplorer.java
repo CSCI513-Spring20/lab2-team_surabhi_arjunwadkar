@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -23,6 +24,15 @@ public class OceanExplorer extends Application{
 	OceanMap oceanMap;
 	Scene scene;
 	Ship ship;
+	int x_co = 6;
+	int y_co = 6;
+	
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		launch(args);
+
+	}
 	
 @Override
 public void start(Stage mapStage) throws Exception{
@@ -66,5 +76,15 @@ private void startSailing() {
             Map.setLocation(navy.getLocation().x/50, navy.getLocation().y/50);
         }
     });
-	}
+}
+
+private void LoadShipImage() {
+	Image shipImage = new Image("\\ship.png",50,50,true,true);
+	shipImageView = new ImageView(shipImage);
+	shipImageView.setX(x_co * scale);
+	shipImageView.setY(y_co * scale);
+	anchorPane.getChildren().add(shipImageView);
+	
+}
+
 }
